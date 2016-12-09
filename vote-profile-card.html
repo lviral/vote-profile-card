@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`vote-profile-card`
+Profile Card
+
+@demo demo/index.html 
+-->
+
+<dom-module id="vote-profile-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'vote-profile-card',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'vote-profile-card',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
