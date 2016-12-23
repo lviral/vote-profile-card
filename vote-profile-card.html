@@ -1,5 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-styles/paper-styles.html" />
 <link rel="import" href="../iron-icons/iron-icons.html">
 <!--
     `vote-profile-card`
@@ -9,31 +13,142 @@
     -->
 <dom-module id="vote-profile-card">
     <template>
-        <style>
+        <style is="custom-style">
             :host {
-            display: block;
+                display: block;
+                max-width: 768px;
+                margin: 0 auto;
+                color: var(--paper-grey-800);
             }
-            .card-content {
-                text-align: center;
-            }
-            .card-statistics {
-                display: table;
+            .card-description {
                 width: 100%;
             }
-            .card-statistics div {
+            .card-description div {
+                width: 90%;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .card-follow {
+                display: table;
+                width: 100%;
+                height: 70px;
+            }
+            .card-follow .cell {
                 display: table-cell;
+                width: 50%;
+            }
+            .card-follow .border-left{
+                border-left: 1px solid var(--paper-grey-500);
+            }
+            .card-follow .cell div {
+                font-size: 130%;
+                width: 50%;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            paper-card {
+                width: 100%;
+            }
+            #photo {
+                width: 150px;
+                height: 170px;
+                margin: 0 auto;
+                -moz-border-radius: 0px 0px 15px 15px;
+                -webkit-border-radius: 0px 0px 15px 15px;
+                -khtml-border-radius: 0px 0px 15px 15px;
+                border-radius: 0px 0px 15px 15px;
+            }
+            #photo iron-image{
+                width: inherit;
+                height: inherit;
+                border-radius: 0 0 10px 10px;
+            }
+            .card-name {
+                width: 100%;
+                margin: 0 auto;
+                display: table;
+            }
+            .card-name .name {
+                vertical-align: middle;
+                font-size: 200%;
+            }
+            .card-name div{
                 width: 33%;
+                display: table-cell;
+            }
+            #btnFollow {
+                height: 72px;
+                margin: 20px;
+                border: 1px solid;
                 text-align: center;
             }
+            #btnFollow {
+                text-align: center;
+            }
+            .card-post {
+                width: 85%;
+                margin: 0 auto;
+                display: table;
+                padding: 20px;
+            }
+            .card-post div{
+                width: 33%;
+                display: table-cell;
+                vertical-align: top;
+            }
+            .card-post paper-material {
+                border: 1px solid gray;
+                width: 90%;
+                max-width: 100px;
+                height: 100px;
+                -moz-border-radius: 15px;
+                -webkit-border-radius: 15px;
+                -khtml-border-radius: 15px;
+                border-radius: 15px;  
+                margin: 0 auto;
+            }
+            .card-post .morePost {
+                background-color: green;
+                color: white;
+                font-size: 150%;
+            }
+            .card-post .morePost div{
+                padding: 20px;
+            }
+            
         </style>
         <paper-card>
-            <div class="card-content">
-                Emmentaler or Emmental is a yellow, medium-hard cheese that originated in the area around Emmental, Switzerland. It is one of the cheeses of Switzerland, and is sometimes known as Swiss cheese.
+            <div id="photo">
+                <iron-image sizing="cover" alt="Profile photo" src="{{photo}}"></iron-image>
             </div>
-            <div class="card-statistics">
-                <div>Post<br>12</div>
-                <div>Followers<br>13</div>
-                <div>Following<br>14</div>
+            <paper-material elevation="1"  class="card-name">
+                <div></div>
+                <div class="name">{{name}}</div>
+                <div>
+                    <paper-button id="btnFollow" toggles raised>
+                        +
+                        <br>
+                        Follow
+                    </paper-button>
+                </div>
+            </paper-material>
+            <paper-material elevation="1" class="card-follow">
+                <div class="cell"><div><span class="number">{{numberOfFollowers}}</span><br>Followers</div></div>
+                <div class="cell border-left"><div><span class="number">{{numberOfFollowing}}</span><br>Following</div></div>
+            </paper-material>
+            <paper-material elevation="2" class="card-description">
+                <div>{{description}}</div>
+            </paper-material>
+            <div class="card-post">
+                <div>
+                    <paper-material></paper-material>
+                </div>
+                <div>
+                    <paper-material></paper-material>
+                </div>
+                <div>
+                    <div><paper-material class="morePost"><div>+{{numberOfPost}}<br>Posts</div></paper-material></div>
+                </div>
             </div>
         </paper-card>
     </template>
@@ -43,6 +158,12 @@
         is: 'vote-profile-card',
         
         properties: {
+            photo: String,
+            name: String,
+            description: String,
+            numberOfFollowers: Number,
+            numberOfFollowing: Number,
+            numberOfPost: Number
         },
         
         });
